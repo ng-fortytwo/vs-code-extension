@@ -4,7 +4,7 @@
     "description": "Adds snippets, create barrel commands, and scafolding for ngRx.",
     "icon": "images/NG-42-logo.svg",
     "version": "0.0.1",
-    "publisher": "ng.42",
+    "publisher": "NG-42",
     "license": "LICENSE.md",
     "bugs": {
       "url": "https://github.com/ng-fortytwo/vs-code-extension/issues",
