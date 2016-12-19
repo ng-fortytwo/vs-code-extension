@@ -2,9 +2,19 @@
     "name": "ng-fortytwo-vscode-extension",
     "displayName": "NG.42 TS Helpers",
     "description": "Adds snippets, create barrel commands, and scafolding for ngRx.",
-    "icon": "../images/NG-42-logo.svg",
+    "icon": "images/NG-42-logo.svg",
     "version": "0.0.1",
     "publisher": "ng.42",
+    "license": "LICENSE.md",
+    "bugs": {
+      "url": "https://github.com/ng-fortytwo/vs-code-extension/issues",
+      "email": "ebertsch@gmail.com"
+    },
+    "homepage": "https://github.com/ng-fortytwo/vs-code-extension/blob/master/README.md",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/ng-fortytwo/vs-code-extension.git"
+    },
     "engines": {
         "vscode": "^1.5.0"
     },
