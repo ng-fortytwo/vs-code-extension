@@ -14,6 +14,12 @@ Adds basic helper commands for working with Angular 2 and TypeScript.
    - All TS files in directory.
    - All directories in the current directory.
 
+   ```
+    // index.ts
+    export * from './sub-dir';
+    export * from './other-sub-dir';
+   ```
+
 ## Upcoming Features
   - Some useful TypeScript snippets for angular 2.
   - Some scaffolding for ngRx.
