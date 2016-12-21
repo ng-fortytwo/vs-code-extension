@@ -3,17 +3,17 @@
     "displayName": "NG.42 TS Helpers",
     "description": "Adds snippets, create barrel commands, and scafolding for ngRx.",
     "icon": "images/NG-42-logo.svg",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "publisher": "NG-42",
     "license": "LICENSE.md",
     "bugs": {
-      "url": "https://github.com/ng-fortytwo/vs-code-extension/issues",
-      "email": "ebertsch@gmail.com"
+        "url": "https://github.com/ng-fortytwo/vs-code-extension/issues",
+        "email": "ebertsch@gmail.com"
     },
     "homepage": "https://github.com/ng-fortytwo/vs-code-extension/blob/master/README.md",
     "repository": {
-      "type": "git",
-      "url": "https://github.com/ng-fortytwo/vs-code-extension.git"
+        "type": "git",
+        "url": "https://github.com/ng-fortytwo/vs-code-extension.git"
     },
     "engines": {
         "vscode": "^1.5.0"
@@ -28,38 +28,61 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
-      "menus": {
-        "explorer/context": [{
-          "command": "ng42.BarrelProvider.barrelDirectory",
-          "group": "1_modification",
-          "when": "explorerResourceIsFolder"
-        }, {
-          "command": "ng42.BarrelProvider.barrelFiles",
-          "group": "1_modification",
-          "when": "explorerResourceIsFolder"
-        }, {
-          "command": "ng42.BarrelProvider.barrelAll",
-          "group": "1_modification",
-          "when": "explorerResourceIsFolder"
-        }]
-      },
-      "commands": [{
-          "command": "ng42.BarrelProvider.barrelDirectory",
-          "title": "Create Barrel (Directories)"
-      }, {
-          "command": "ng42.BarrelProvider.barrelFiles",
-          "title": "Create Barrel (Files)"
-      }, {
-          "command": "ng42.BarrelProvider.barrelAll",
-          "title": "Create Barrel (All)"
-      }],
-      "snippets": [
-        { "language": "typescript", "path": "./snippets/redux/actions.json" },
-        { "language": "typescript", "path": "./snippets/redux/reducers.json" },
-        { "language": "typescript", "path": "./snippets/redux/selectors.json" },
-        { "language": "typescript", "path": "./snippets/redux/states.json" },
-        { "language": "typescript", "path": "./snippets/redux/effects.json" }
-      ]
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "ng42.BarrelProvider.barrelDirectory",
+                    "group": "1_modification",
+                    "when": "explorerResourceIsFolder"
+                },
+                {
+                    "command": "ng42.BarrelProvider.barrelFiles",
+                    "group": "1_modification",
+                    "when": "explorerResourceIsFolder"
+                },
+                {
+                    "command": "ng42.BarrelProvider.barrelAll",
+                    "group": "1_modification",
+                    "when": "explorerResourceIsFolder"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "ng42.BarrelProvider.barrelDirectory",
+                "title": "Create Barrel (Directories)"
+            },
+            {
+                "command": "ng42.BarrelProvider.barrelFiles",
+                "title": "Create Barrel (Files)"
+            },
+            {
+                "command": "ng42.BarrelProvider.barrelAll",
+                "title": "Create Barrel (All)"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "typescript",
+                "path": "./snippets/redux/actions.json"
+            },
+            {
+                "language": "typescript",
+                "path": "./snippets/redux/reducers.json"
+            },
+            {
+                "language": "typescript",
+                "path": "./snippets/redux/selectors.json"
+            },
+            {
+                "language": "typescript",
+                "path": "./snippets/redux/states.json"
+            },
+            {
+                "language": "typescript",
+                "path": "./snippets/redux/effects.json"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",

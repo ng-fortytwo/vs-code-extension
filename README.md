@@ -46,6 +46,6 @@ Adds basic helper commands for working with Angular 2 and TypeScript.
 
 ## Release Notes
 
-### 1.0.0
+### 0.0.3
 
-Initial release of NG.42 TS Helpers
+Added ngRx Snippets
