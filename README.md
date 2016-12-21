@@ -7,10 +7,12 @@ Adds basic helper commands for working with Angular 2 and TypeScript.
 
 Any and all feed back is welcome.
 
+barrellAll
 
 ## Features
 
 #### Create Barrels
+  ![barrelMenu](images/barrel-menu.png)
   - Exporer Context menu for creating index.ts with exports for:
    - All TS files and directories in the current directory.
    - All TS files in directory.
@@ -48,6 +50,6 @@ Any and all feed back is welcome.
 
 ## Release Notes
 
-### 0.0.3
+### 0.0.4
 
 Added ngRx Snippets
