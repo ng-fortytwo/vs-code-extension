@@ -22,37 +22,40 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:ngFortyTwoCode.createBarrelFolders",
-        "onCommand:ngFortyTwoCode.createBarrelFiles",
-        "onCommand:ngFortyTwoCode.createBarrelAll"
+        "onCommand:ng42.BarrelProvider.barrelDirectory",
+        "onCommand:ng42.BarrelProvider.barrelFiles",
+        "onCommand:ng42.BarrelProvider.barrelAll"
     ],
-    "main": "./out/src/ngFortyTwoCode",
+    "main": "./out/src/extension",
     "contributes": {
       "menus": {
         "explorer/context": [{
-          "command": "ngFortyTwoCode.createBarrelFolders",
+          "command": "ng42.BarrelProvider.barrelDirectory",
           "group": "1_modification",
           "when": "explorerResourceIsFolder"
         }, {
-          "command": "ngFortyTwoCode.createBarrelFiles",
+          "command": "ng42.BarrelProvider.barrelFiles",
           "group": "1_modification",
           "when": "explorerResourceIsFolder"
         }, {
-          "command": "ngFortyTwoCode.createBarrelAll",
+          "command": "ng42.BarrelProvider.barrelAll",
           "group": "1_modification",
           "when": "explorerResourceIsFolder"
         }]
       },
       "commands": [{
-          "command": "ngFortyTwoCode.createBarrelFolders",
-          "title": "Create Barrel (Folders)"
+          "command": "ng42.BarrelProvider.barrelDirectory",
+          "title": "Create Barrel (Directories)"
       }, {
-          "command": "ngFortyTwoCode.createBarrelFiles",
+          "command": "ng42.BarrelProvider.barrelFiles",
           "title": "Create Barrel (Files)"
       }, {
-          "command": "ngFortyTwoCode.createBarrelAll",
+          "command": "ng42.BarrelProvider.barrelAll",
           "title": "Create Barrel (All)"
-      }]
+      }],
+      "snippets": [
+        { "language": "typescript", "path": "./snippets/redux.json" }
+      ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",

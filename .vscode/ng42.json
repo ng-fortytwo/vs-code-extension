@@ -1,0 +1,6 @@
+{
+  "extensions": [".ts"],
+  "barrelHeader": [],
+  "barrelFooter": [],
+  "barrelItemTemplate": ""
+}
