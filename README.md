@@ -5,6 +5,8 @@
 
 Adds basic helper commands for working with Angular 2 and TypeScript.
 
+Any and all feed back is welcome.
+
 
 ## Features
 
