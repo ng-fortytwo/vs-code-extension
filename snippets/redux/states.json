@@ -1,0 +1,42 @@
+{
+  "ng42.redux.state": {
+    "Create ngRx Application State file": {
+      "prefix": "ngr-app-state-file",
+      "body": [
+        "import * as router\t\t\t\tfrom '@ngrx/router-store';",
+        "// import * as fromFeature\t\t\t\tfrom './FeatureModule';",
+        "",
+        "",
+        "export interface State {",
+        "\trouter: router.RouterState;",
+        "\t// feature: fromFeature.State;",
+        "}",
+        "$0"
+      ]
+    },
+    "Create ngRx Feature State file": {
+      "prefix": "ngr-feature-state-file",
+      "body": [
+        "// import { FeatureModel }\t\t\t\tfrom './models';",
+        "",
+        "export interface State {",
+        "\t// data: FeatureModel;",
+        "\tdata: any;",
+        "\thasError: boolean;",
+        "\tisLoading: boolean;",
+        "\tisLoaded: boolean;",
+        "\terror: any;",
+        "}",
+        "",
+        "export const initialState = {",
+        "\tdata: null,",
+        "\thasError: false,",
+        "\tisLoading: false,",
+        "\tisLoaded: false,",
+        "\terror: null,",
+        "}",
+        "$0"
+      ]
+    }
+  }
+}

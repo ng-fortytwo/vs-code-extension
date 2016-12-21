@@ -1,0 +1,50 @@
+{
+  "ng42.redux.effects": {
+    "Create ngRx effects file": {
+      "prefix": "ngr-effect-file",
+      "body": [
+        "import { Injectable } from '@angular/core';",
+        "import { Http } from '@angular/http';",
+        "import { Actions, Effect } from '@ngrx/effects';",
+        "",
+        "import * as fromFeature from './feature/actions';",
+        "",
+        "@Injectable()",
+        "export class AuthEffects {",
+        "\tconstructor(",
+        "\t\tprivate featureService: fromFeature.FeatureService,",
+        "\t\tprivate actions$: Actions",
+        "\t) { }",
+        "",
+        "\t@Effect()",
+        "\tapiAction$: Observable<Action> = this.actions$",
+        "\t\t// Listen for the 'API_REQUESTED' action",
+        "\t\t.ofType(fromFeature.ActionTypes.API_REQUESTED)",
+        "\t\t// Map the payload into JSON to use as the request body",
+        "\t\t.map(action => JSON.stringify(action.payload))",
+        "\t\t.switchMap(payload => this.featureService.doAction(payload)",
+        "\t\t// If successful, dispatch success action with result",
+        "\t\t.map(res => ({ type: fromFeature.ActionTypes.API_COMPLETED, payload: res.json() }))",
+        "\t\t// If request fails, dispatch failed action",
+        "\t\t.catch(() => Observable.of({ type: fromFeature.ActionTypes.API_ERROR }));",
+        "\t\t);",
+        "\t}",
+        "$0"
+      ]
+    },
+    "Create ngRx effect": {
+      "prefix": "ngr-effect",
+      "body": [
+        "@Effect()",
+        "${1:action}$: Observable<Action> = this.actions$",
+        "\t.ofType(from${2:feature}.ActionTypes.${3:REQUEST_ACTION})",
+        "\t.map(action => JSON.stringify(action.payload))",
+        "\t.switchMap(payload => this.${4:service}.${5:getData}(payload)",
+        "\t.map(res => ({ type: from$2.ActionTypes.${6:COMPLETE_ACTION}, payload: res.json() }))",
+        "\t.catch(() => Observable.of({ type: from$2.ActionTypes.${7:ERROR_ACTION} }));",
+        "$0"
+      ]
+    }
+  }
+}
+

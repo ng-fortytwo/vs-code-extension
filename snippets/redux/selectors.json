@@ -1,0 +1,29 @@
+{
+  "ng42.redux.selectors": {
+    "Create ngRx selector file": {
+      "prefix": "ngr-selector-file",
+      "body": [
+        "import { createSelector } from 'reselect';",
+        "import { compose } from '@ngrx/core/compose';",
+        "import { Observable } from 'rxjs/Observable';",
+        "",
+        "import * as fromApp from '../app-state/state';",
+        "import * as from${1:Feature} from './state';",
+        "",
+        "// get feature state from the app state",
+        "export const get$1State = (state: fromApp.State) => state.layout;",
+        "",
+        "// get isLoaded from feature state",
+        "const _isLoaded = (state: from$1.State) => state.isLoaded;",
+        "export const getIsLoaded = createSelector(get$1State, _isLoaded);"
+      ]
+    },
+    "Create ngRx selector": {
+      "prefix": "ngr-selector",
+      "body": [
+        "const _${1:StateValue} = (state: from${2:Feature}.State) => state.$1;",
+        "export const get$1 = createSelector(get$2State, _$1);"
+      ]
+    }
+  }
+}

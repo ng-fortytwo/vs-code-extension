@@ -124,7 +124,7 @@ export default class BarrelProvider {
       .reduce((out, assetPath) => {
         return out.concat(this.createItem(settings.itemTemplate, assetPath))
       }, settings.headerTemplate)
-      .concat(settings.footerTemplate)
+      .concat(settings.footerTemplate, '// end:ng42.barrel')
       .join(EOL);
   }
 

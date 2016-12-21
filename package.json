@@ -54,7 +54,11 @@
           "title": "Create Barrel (All)"
       }],
       "snippets": [
-        { "language": "typescript", "path": "./snippets/redux.json" }
+        { "language": "typescript", "path": "./snippets/redux/actions.json" },
+        { "language": "typescript", "path": "./snippets/redux/reducers.json" },
+        { "language": "typescript", "path": "./snippets/redux/selectors.json" },
+        { "language": "typescript", "path": "./snippets/redux/states.json" },
+        { "language": "typescript", "path": "./snippets/redux/effects.json" }
       ]
     },
     "scripts": {

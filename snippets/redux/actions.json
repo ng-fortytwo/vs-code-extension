@@ -1,0 +1,63 @@
+{
+  "ng42.redux.actions": {
+    "Create ngRx Action Types": {
+      "prefix": "ngr-action-types-map",
+      "body": [
+        "export const ActionTypes = {",
+        "\t\t${1:Name}:\t\t\ttype('[${2:Feature}] ${3:HumanName}'),",
+        "\t\t$0",
+        "};"
+      ]
+    },
+    "Create ngRx Action Type": {
+      "prefix": "ngr-action-type",
+      "body": [
+        "${1:Name}:\t\t\ttype('[${2:Feature}] ${3:HumanName}'),",
+        "$0"
+      ]
+    },
+    "Create ngRx Action Class": {
+      "prefix": "ngr-action",
+      "body": [
+        "export class ${1:ActionName}Action implements Action {",
+        "\ttype = ActionTypes.${2:ActionType};",
+        "}",
+        "$0"
+      ]
+    },
+    "Create ngRx Actions file": {
+      "prefix": "ngr-actions-file",
+      "body": [
+        "import { Action } from '@ngrx/store';",
+        "import { type } from '../util';",
+        "",
+        "",
+        "export const ActionTypes = {",
+        "\t\tAPI_REQUESTED:\t\t\ttype('[${1:Feature}] -API Requested-'),",
+        "\t\tAPI_COMPLETED:\t\t\ttype('[$1] -API Completed-'),",
+        "\t\tAPI_ERROR:\t\t\ttype('[$1] -API Error-')",
+        "};",
+        "",
+        "",
+        "export class RequestedAction implements Action {",
+        "\ttype = ActionTypes.API_REQUESTED;",
+        "}",
+        "",
+        "export class CompletedAction implements Action {",
+        "\ttype = ActionTypes.API_COMPLETED;",
+        "}",
+        "",
+        "export class ErrorAction implements Action {",
+        "\ttype = ActionTypes.API_ERROR;",
+        "}",
+        "",
+        "",
+        "export type $1Action",
+        "\t= RequestedAction",
+        "\t| CompletedAction,",
+        "\t| ErrorAction;",
+        "$0"
+      ]
+    }
+  }
+}

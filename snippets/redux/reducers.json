@@ -1,0 +1,107 @@
+{
+  "ng42.redux.reducers": {
+    "Create ngRx reducer switch case": {
+      "prefix": "ngr-reducer-case",
+      "body": [
+        "case ActionTypes.${1:Action}:",
+        "\treturn Object.assign({}, state, {",
+        "\t\t${2:property}: action.payload.${3:property},",
+        "\t\t$0",
+        "});"
+      ]
+    },
+    "Create ngRx reducer switch": {
+      "prefix": "ngr-reducer",
+      "body": [
+        "export function reducer(state = initialState, action: ${1:Feature}Action): State {",
+        "\tswitch(action.type) {",
+        "",
+        "\t\tcase ActionTypes.${2:Action}:",
+        "\t\t\treturn Object.assign({}, state, action.payload);",
+        "",
+        "$0",
+        "",
+        "\t\tdefault: {",
+        "\t\t\t\treturn state;",
+        "\t\t}",
+        "\t}",
+        "}"
+      ]
+    },
+    "Create ngRx Feature Reducer file": {
+      "prefix": "ngr-feature-reducer-file",
+      "body": [
+        "import { ${1:Feature}Action, ActionTypes } from './actions';",
+        "import { State, initialState } from './state';",
+        "",
+        "",
+        "export function reducer(state = initialState, action: $1Action): State {",
+        "\tswitch(action.type) {",
+        "",
+        "\t\tcase ActionTypes.API_REQUESTED: {",
+        "\t\t\treturn Object.assign({}, state, {",
+        "\t\t\t\tisLoading: true,",
+        "\t\t\t\tisLoaded: false,",
+        "\t\t\t\thasError: false,",
+        "\t\t\t\terror: null",
+        "\t\t\t});",
+        "\t\t}",
+        "",
+        "\t\tcase ActionTypes.API_COMPLETED: {",
+        "\t\t\treturn Object.assign({}, state, {",
+        "\t\t\t\tisLoading: false,",
+        "\t\t\t\tisLoaded: true,",
+        "\t\t\t\tdata: action.payload",
+        "\t\t\t});",
+        "\t\t}",
+        "",
+        "\t\tcase ActionTypes.API_ERROR: {",
+        "\t\t\treturn Object.assign({}, state, {",
+        "\t\t\t\tisLoading: false,",
+        "\t\t\t\tisLoaded: false,",
+        "\t\t\t\thasError: true,",
+        "\t\t\t\terror: action.payload",
+        "\t\t\t});",
+        "\t\t}",
+        "",
+        "\t\tdefault: {",
+        "\t\t\t\treturn state;",
+        "\t\t}",
+        "\t}",
+        "}",
+        "$0"
+      ]
+    },
+    "Create ngRx Application Reducer file": {
+      "prefix": "ngr-app-reducer-file",
+      "body": [
+        "import { environment }      from '../../../environments/environment';",
+        "import { Observable }       from 'rxjs/Observable';",
+        "import { compose }          from '@ngrx/core/compose';",
+        "import { ActionReducer, combineReducers }    from '@ngrx/store';",
+        "import { storeFreeze }      from 'ngrx-store-freeze';",
+        "",
+        "import * as fromApp             from '../app-state';",
+        "import * as fromRouter          from '@ngrx/router-store';",
+        "// import * as fromFeatureModule         from '../feature';",
+        "",
+        "const reducers = {",
+        "\trouter: fromRouter.routerReducer,",
+        "\t// feature: fromFeatureModule.reducer,",
+        "};",
+        "",
+        "const developmentReducer: ActionReducer<fromApp.State> = compose(storeFreeze, combineReducers)(reducers);",
+        "const productionReducer: ActionReducer<fromApp.State> = combineReducers(reducers);",
+        "",
+        "export function reducer(state: any, action: any) {",
+        "\tif (environment.production) {",
+        "\t\treturn productionReducer(state, action);",
+        "\t} else {",
+        "\t\treturn developmentReducer(state, action);",
+        "\t}",
+        "}",
+        "$0"
+      ]
+    }
+  }
+}
