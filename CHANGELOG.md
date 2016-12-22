@@ -7,6 +7,6 @@
 - Added ngRx Snippets
 
 ## [0.0.4]
-- Fixed Barrel Commands
+- Fixed Barrel Commands on Windows
 
 
