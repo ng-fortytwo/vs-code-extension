@@ -6,5 +6,5 @@ export function showAndOpen(srcPath: string) {
 }
 
 export function showError(err: string) {
-  return vscode.window.showErrorMessage('Unable to create Barrel.');
+  return vscode.window.showErrorMessage(err);
 }

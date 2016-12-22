@@ -7,6 +7,10 @@ import * as template from '../lib/template';
 import { EOL } from 'os';
 
 let DEBUG: boolean = false;
+const BARREL_TEMPLATE = {
+  header: '// start:ng42.barrel',
+  footer: '// end:ng42.barrel'
+};
 
 enum BarrelType {
   All,
@@ -29,6 +33,7 @@ const defaultSettings = {
   headerTemplate: [],
   extensions: ['.ts']
 };
+
 
 let settings: BarrelSettings;
 
@@ -75,12 +80,12 @@ export default class BarrelProvider {
   createBarrel(uri: vscode.Uri, barrelType: BarrelType) {
     if (!uri) return editor.showError('No directory selected in the sidebar explorer.');
 
-    const srcPath = uri.path;
+    const srcPath = uri.fsPath;
     const barrelName = settings.barrelName;
     const barrelPath = io.getFullPath(srcPath, barrelName);
 
     if(io.exists(barrelPath)) {
-      return;
+      return editor.showError(`${barrelName} already exists at this location.`);
     }
 
     return this.getArtifacts(srcPath, barrelType)
@@ -120,12 +125,19 @@ export default class BarrelProvider {
   }
 
   createBody(artifacts: string[]) {
-    return artifacts
-      .reduce((out, assetPath) => {
-        return out.concat(this.createItem(settings.itemTemplate, assetPath))
-      }, settings.headerTemplate)
-      .concat(settings.footerTemplate, '// end:ng42.barrel')
-      .join(EOL);
+
+    const rendered = artifacts
+      .map(art => this.createItem(settings.itemTemplate, art));
+
+    let body = [
+      BARREL_TEMPLATE.header,
+      settings.headerTemplate,
+      ...rendered,
+      settings.footerTemplate,
+      BARREL_TEMPLATE.footer
+    ];
+
+    return body.join(EOL);
   }
 
 }
