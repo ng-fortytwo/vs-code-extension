@@ -84,7 +84,7 @@ export default class BarrelProvider {
     const barrelName = settings.barrelName;
     const barrelPath = io.getFullPath(srcPath, barrelName);
 
-    if(io.exists(barrelPath)) {
+    if (io.exists(barrelPath)) {
       return editor.showError(`${barrelName} already exists at this location.`);
     }
 
@@ -102,7 +102,7 @@ export default class BarrelProvider {
 
   getArtifacts(srcPath: string, barrelType: BarrelType): Promise<string[]> {
     let artifacts: string[] = [];
-    switch(barrelType) {
+    switch (barrelType) {
       case BarrelType.All:
         const files = io.getFiles(srcPath, settings.extensions);
         const directories = io.getDirectories(srcPath);
@@ -134,7 +134,8 @@ export default class BarrelProvider {
       settings.headerTemplate,
       ...rendered,
       settings.footerTemplate,
-      BARREL_TEMPLATE.footer
+      BARREL_TEMPLATE.footer,
+      EOL
     ];
 
     return body.join(EOL);

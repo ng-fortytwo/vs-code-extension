@@ -1,0 +1,12 @@
+{
+  "configuration.barrels.barrelName": "Sets the file name for the generated barrel.",
+  "configuration.barrels.includeFiles": "Configures which files to include when creating a file barrel.",
+  "configuration.barrels.ignore": "Configures which files or directories to ignore when creating a barrel.",
+  "configuration.barrels.itemTemplate": "Configure the item template used when a file/directory is processed.",
+  "configuration.barrels.headerTemplate": "Configure the header template which indicates the start of a barrel.",
+  "configuration.barrels.footerTemplate": "Configure the footer template which indicates the end of a barrel.",
+  "configuration.barrels.enableHeader": "Whether the header template is used when creating a barrel.",
+  "configuration.barrels.enableFooter": "Whether the footer template is used when creating a barrel.",
+  "configuration.title": "NG42",
+  "commands.categroy.ng42": "NG42"
+}
