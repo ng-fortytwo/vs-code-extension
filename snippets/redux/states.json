@@ -33,7 +33,7 @@
         "\thasError: false,",
         "\tisLoading: false,",
         "\tisLoaded: false,",
-        "\terror: null,",
+        "\terror: null",
         "}",
         "$0"
       ]
