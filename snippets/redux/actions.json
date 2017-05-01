@@ -54,7 +54,7 @@
         "",
         "export type $1Action",
         "\t= RequestedAction",
-        "\t| CompletedAction,",
+        "\t| CompletedAction",
         "\t| ErrorAction;",
         "$0"
       ]
