@@ -1,0 +1,22 @@
+{
+  "configuration.title": "NG42",
+  "configuration.barrels.barrelName": "Sets the file name for the generated barrel.",
+  "configuration.barrels.include": "Configure glob patterns for including files and folders when creating barrels",
+  "configuration.barrels.exclude": "Configure glob patterns for excluding files and folders when creating barrels",
+  "configuration.barrels.fileTemplate": "Configure the template used when a file is processed.",
+  "configuration.barrels.directoryTemplate": "Configure the template used when a directory is processed.",
+  "configuration.barrels.headerTemplate": "Configure the header template which indicates the start of a barrel.",
+  "configuration.barrels.footerTemplate": "Configure the footer template which indicates the end of a barrel.",
+  "configuration.barrels.useTemplates": "Which templates should be used when creating barrels.",
+  "configuration.barrels.useTemplates.header": "Use the header template when creating a barrel",
+  "configuration.barrels.useTemplates.footer": "Use the footer template when creating a barrel",
+  "configuration.barrels.eol": "The default end of line character.",
+  "configuration.barrels.menus": "Controlls which barrel commands are shown in the file explorer.",
+  "configuration.barrels.menus.createBarrel": "Show create barrel (All) command in the explorer menu",
+  "configuration.barrels.menus.createDirectoryBarrel": "Show create barrel (directories) command in the explorer menu",
+  "configuration.barrels.menus.createFileBarrel": "Show create barrel (Files) command in the explorer menu",
+  "commands.categroy.ng42": "NG42",
+  "command.createDirectoryBarrel": "Create Barrel (Directories)",
+  "command.createFileBarrel": "Create Barrel (Files)",
+  "command.createBarrel": "Create Barrel (All)"
+}
