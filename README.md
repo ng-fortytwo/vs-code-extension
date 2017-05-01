@@ -50,6 +50,8 @@ barrellAll
 
 ## Release Notes
 
-### 0.0.4
+### 0.0.6
+- Added config section for barrel commands.
+- Added Glob support for barrel commands.
+- Added Output support for terminal.
 
-Added ngRx Snippets
