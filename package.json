@@ -47,15 +47,15 @@
         "ng42.barrels.include": {
           "type": "object",
           "default": {
-            "**/*.ts": true,
-            "**/*.js": true
+            "*.ts": true,
+            "*.js": true
           },
           "description": "%configuration.barrels.include%"
         },
         "ng42.barrels.exclude": {
           "type": "object",
           "default": {
-            "**/*.spec.*": true
+            "*.spec.*": true
           },
           "description": "%configuration.barrels.exclude%"
         },

@@ -17,7 +17,7 @@ export function getDirectories(srcPath: string, excludes: string | string[]): Si
     ignore: excludes,
     nodir: false
   }).map(path => ({
-    path,
+    path: path.substring(0, path.length - 1),
     isDirectory: true
   }));
 
