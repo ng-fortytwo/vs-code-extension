@@ -9,4 +9,8 @@
 ## [0.0.4]
 - Fixed Barrel Commands on Windows
 
+## [0.0.6]
+- Added config section for barrel commands.
+- Added Glob support for barrel commands.
+- Added Output support for terminal.
 
