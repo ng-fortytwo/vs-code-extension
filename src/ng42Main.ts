@@ -3,21 +3,24 @@
 import { workspace, Disposable, ExtensionContext, window } from 'vscode';
 import * as nls from 'vscode-nls';
 
-import BarrelProvider from './providers/barrelProvider';
-
+import { BarrelProvider } from './providers/barrelProvider';
+import { BarrelConfig } from './barrelConfig'
 
 
 const localize = nls.config()();
 
 async function init(disposables: Disposable[]): Promise<void> {
   const rootPath = workspace.rootPath;
-  if (!rootPath) { return; }
+  const barrlConfig = new BarrelConfig(workspace.getConfiguration('ng42.barrels'));
 
-  const outputChannel = window.createOutputChannel('Git');
+  if (!rootPath || !barrlConfig) {
+    return;
+  }
+
+  const outputChannel = window.createOutputChannel('NG.42');
   outputChannel.appendLine(localize('NG.42 initialized', "NG.42 initialized"));
 
-  const barreler = new BarrelProvider(null, outputChannel);
-
+  const barreler = new BarrelProvider(barrlConfig, outputChannel);
 
   disposables.push(barreler);
 }

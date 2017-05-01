@@ -1,21 +1,21 @@
 'use strict';
 
 import { Disposable, window, workspace, OutputChannel, Uri, commands } from 'vscode';
+import { EOL } from 'os';
 import * as nls from 'vscode-nls';
+import * as path from 'path';
+import * as fs from 'path';
+
 
 import * as io from '../libs/io';
 import * as editor from '../libs/editor';
 import * as template from '../libs/template';
-import { EOL } from 'os';
+import { BarrelConfig } from '../barrelConfig';
+import { SimpleIOResult } from '../models';
 
 
 const localize = nls.loadMessageBundle();
 
-let DEBUG: boolean = false;
-const BARREL_TEMPLATE = {
-  header: '// start:ng42.barrel',
-  footer: '// end:ng42.barrel'
-};
 
 enum BarrelType {
   All,
@@ -23,32 +23,7 @@ enum BarrelType {
   Directories
 }
 
-interface BarrelSettings {
-  barrelName: string;
-  itemTemplate: string;
-  footerTemplate: string[];
-  headerTemplate: string[];
-  extensions: string[];
-}
-
-const defaultSettings = {
-  barrelName: 'index.ts',
-  itemTemplate: `export * from './$asset_name';`,
-  footerTemplate: [],
-  headerTemplate: [],
-  extensions: ['.ts']
-};
-
-
-let settings: BarrelSettings;
-
-const CREATE_BARREL = 'ng42.createBarrel';
-const CREATE_FILE_BARREL = 'ng42.createFileBarrel';
-const CREATE_DIRECTORY_BARREL = 'ng42.createDirectoryBarrel';
-
-interface BarrelerOptions { }
-
-export default class BarrelProvider {
+export class BarrelProvider {
   private static readonly Commands: { commandId: string; method: any; }[] = [];
   private static Command(commandId: string): Function {
     return (target: any, key: string, descriptor: any) => {
@@ -98,15 +73,11 @@ export default class BarrelProvider {
 
   private disposables: Disposable[];
 
-  constructor(options: BarrelerOptions, private outputChannel: OutputChannel) {
+  constructor(private options: BarrelConfig, private outputChannel: OutputChannel) {
     this.disposables = BarrelProvider.Commands
       .map(({ commandId, method }) => commands.registerCommand(commandId, method, this));
   }
 
-
-  activate() {
-    settings = this.readSettings();
-  }
 
   dispose(): void {
     this.disposables.forEach(d => d.dispose());
@@ -130,68 +101,79 @@ export default class BarrelProvider {
     return this.createBarrel(uri, BarrelType.Directories);
   }
 
+  @BarrelProvider.CatchErrors
   async createBarrel(uri: Uri, barrelType: BarrelType) {
-    if (!uri) return editor.showError('No directory selected in the sidebar explorer.');
+    if (!uri) throw new Error('No directory selected in the sidebar explorer.');
 
     const srcPath = uri.fsPath;
-    const barrelName = settings.barrelName;
+    const barrelName = this.options.barrelName;
     const barrelPath = io.getFullPath(srcPath, barrelName);
 
     if (io.exists(barrelPath)) {
-      return editor.showError(`${barrelName} already exists at this location.`);
+      throw new Error(`${barrelName} already exists at this location.`);
     }
 
     return this.getArtifacts(srcPath, barrelType)
       .then(artifacts => this.createBody(artifacts))
       .then(body => io.writeFile(barrelPath, body))
       .then(() => editor.showAndOpen(barrelPath))
-      .catch(err => editor.showError(err));
+      .catch((err: Error) => { throw err });
   }
 
+  async getArtifacts(srcPath: string, barrelType: BarrelType): Promise<SimpleIOResult[]> {
+    let artifacts: SimpleIOResult[] = [];
+    const includes = Object.keys(this.options.include);
+    const excludes = Object.keys(this.options.exclude);
 
-  readSettings(): BarrelSettings {
-    return defaultSettings;
-  }
-
-  async getArtifacts(srcPath: string, barrelType: BarrelType): Promise<string[]> {
-    let artifacts: string[] = [];
     switch (barrelType) {
       case BarrelType.All:
-        const files = io.getFiles(srcPath, settings.extensions);
-        const directories = io.getDirectories(srcPath);
-        artifacts.push(...files, ...directories);
+
+        artifacts.push(...includes
+          .reduce<SimpleIOResult[]>((files, glob) => files
+            .concat(io.getFiles(srcPath, glob, excludes)), []));
+
+        artifacts.push(...io.getDirectories(srcPath, excludes));
+
         break;
       case BarrelType.Files:
-        artifacts.push(...io.getFiles(srcPath, settings.extensions));
+        artifacts.push(...includes
+          .reduce<SimpleIOResult[]>((files, glob) => files
+            .concat(io.getFiles(srcPath, glob, excludes)), []));
         break;
       case BarrelType.Directories:
-        artifacts.push(...io.getDirectories(srcPath));
+        artifacts.push(...io.getDirectories(srcPath, excludes));
         break;
     }
 
     return Promise.resolve(artifacts);
   }
 
-  createItem(barrelTemplate, asset) {
-    const itemTemplate = template.hydrate(barrelTemplate, asset)
+  createItem(asset: SimpleIOResult) {
+    const assetTemplate = asset.isDirectory ? this.options.directoryTemplate : this.options.fileTemplate;
+
+    const itemTemplate = template.hydrate(assetTemplate, asset.path)
     return itemTemplate;
   }
 
-  createBody(artifacts: string[]) {
-
+  createBody(artifacts: SimpleIOResult[]) {
+    let contents: string[] = []
     const rendered = artifacts
-      .map(art => this.createItem(settings.itemTemplate, art));
+      .map(art => this.createItem(art));
 
-    let body = [
-      BARREL_TEMPLATE.header,
-      settings.headerTemplate,
-      ...rendered,
-      settings.footerTemplate,
-      BARREL_TEMPLATE.footer,
-      EOL
-    ];
 
-    return body.join(EOL);
+    if (this.options.useTemplates.header) {
+      contents.push(this.options.headerTemplate);
+    }
+
+    contents.push(...rendered);
+
+    if (this.options.useTemplates.footer) {
+      contents.push(this.options.footerTemplate);
+    }
+
+    contents.push(this.options.eol);
+
+    return contents.join(this.options.eol);
   }
 
 }

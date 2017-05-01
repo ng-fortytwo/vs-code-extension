@@ -1,205 +1,234 @@
 {
-    "name": "ng-fortytwo-vscode-extension",
-    "displayName": "NG.42 TS Helpers",
-    "description": "Adds snippets, create barrel commands, and scafolding for ngRx.",
-    "icon": "images/NG-42-logo.svg",
-    "version": "0.0.4",
-    "publisher": "NG-42",
-    "license": "LICENSE.md",
-    "bugs": {
-        "url": "https://github.com/ng-fortytwo/vs-code-extension/issues",
-        "email": "ebertsch@gmail.com"
-    },
-    "homepage": "https://github.com/ng-fortytwo/vs-code-extension/blob/master/README.md",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ng-fortytwo/vs-code-extension.git"
-    },
-    "engines": {
-        "vscode": "^1.5.0"
-    },
+  "name": "ng-fortytwo-vscode-extension",
+  "displayName": "NG.42 TS Helpers",
+  "description": "Adds snippets, create barrel commands, and scafolding for ngRx.",
+  "icon": "images/NG-42-logo.svg",
+  "version": "0.0.5",
+  "publisher": "NG-42",
+  "license": "LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/ng-fortytwo/vs-code-extension/issues",
+    "email": "ebertsch@gmail.com"
+  },
+  "homepage": "https://github.com/ng-fortytwo/vs-code-extension/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ng-fortytwo/vs-code-extension.git"
+  },
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:jsx-tags",
+    "onCommand:ng42.createDirectoryBarrel",
+    "onCommand:ng42.createFileBarrel",
+    "onCommand:ng42.createBarrel"
+  ],
+  "main": "./out/src/ng42Main.js",
+  "contributes": {
     "configuration": {
-        "title": "%configuration.title%",
-        "type": "object",
-        "order": 42,
-        "properties": {
-            "ng42.barrels.barrelName": {
-                "type": "string",
-                "default": "index.ts",
-                "description": "%configuration.barrels.barrelName%"
-            },
-            "ng42.barrels.include": {
-                "type": "object",
-                "default": {
-                    "**/*.ts": true,
-                    "**/*.js": true
-                },
-                "description": "%configuration.barrels.include%"
-            },
-            "ng42.barrels.exclude": {
-                "type": "object",
-                "default": {
-                    "**/*.spec.*": true
-                },
-                "description": "%configuration.barrels.exclude%"
-            },
-            "ng42.barrels.fileTemplate": {
-                "type": [
-                    "string",
-                    "array"
-                ],
-                "default": [
-                    "export * from './$asset_name';"
-                ],
-                "description": "%configuration.barrels.fileTemplate%"
-            },
-            "ng42.barrels.directoryTemplate": {
-                "type": [
-                    "string",
-                    "array"
-                ],
-                "default": [
-                    "export * from './$asset_name';"
-                ],
-                "description": "%configuration.barrels.directoryTemplate%"
-            },
-            "ng42.barrels.headerTemplate": {
-                "type": [
-                    "string",
-                    "array"
-                ],
-                "default": [
-                    "// start:ng42.barrel"
-                ],
-                "description": "%configuration.barrels.headerTemplate%"
-            },
-            "ng42.barrels.footerTemplate": {
-                "type": [
-                    "string",
-                    "array"
-                ],
-                "default": [
-                    "// end:ng42.barrel"
-                ],
-                "description": "%configuration.barrels.footerTemplate%"
-            },
-            "ng42.barrels.useTemplates": {
-                "type": "object",
-                "default": {
-                    "header": true,
-                    "footer": true
-                },
-                "description": "%configuration.barrels.useTemplates%"
-            },
-            "ng42.barrels.eol": {
-                "type": "string",
-                "enum": [
-                    "\n",
-                    "\r\n",
-                    "os"
-                ],
-                "default": "os",
-                "description": "%configuration.barrels.eol%"
-            },
-            "ng42.barrels.menus": {
-                "type": "object",
-                "default": {
-                    "createBarrel": true,
-                    "createDirectoryBarrel": true,
-                    "createFileBarrel": true
-                },
-                "description": "%configuration.barrels.menus%"
-            }
-        }
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onLanguage:javascript",
-        "onLanguage:javascriptreact",
-        "onLanguage:typescript",
-        "onLanguage:typescriptreact",
-        "onLanguage:jsx-tags",
-        "onCommand:ng42.createDirectoryBarrel",
-        "onCommand:ng42.createFileBarrel",
-        "onCommand:ng42.createBarrel"
-    ],
-    "main": "./out/src/ng42Main",
-    "contributes": {
-        "menus": {
-            "explorer/context": [
-                {
-                    "command": "ng42.createDirectoryBarrel",
-                    "group": "1_modification",
-                    "when": "explorerResourceIsFolder && ng42.barrels.showMenus.createDirectoryBarrel"
-                },
-                {
-                    "command": "ng42.createFileBarrel",
-                    "group": "1_modification",
-                    "when": "explorerResourceIsFolder && ng42.barrels.showMenus.createFileBarrel"
-                },
-                {
-                    "command": "ng42.createBarrel",
-                    "group": "1_modification",
-                    "when": "explorerResourceIsFolder && ng42.barrels.showMenus.createBarrel"
-                }
-            ]
+      "title": "%configuration.title%",
+      "type": "object",
+      "order": 42,
+      "properties": {
+        "ng42.barrels.barrelName": {
+          "type": "string",
+          "default": "index.ts",
+          "description": "%configuration.barrels.barrelName%"
         },
-        "commands": [
-            {
-                "title": "%command.createDirectoryBarrel%",
-                "category": "%commands.categroy.ng42%",
-                "command": "ng42.createDirectoryBarrel"
+        "ng42.barrels.include": {
+          "type": "object",
+          "default": {
+            "**/*.ts": true,
+            "**/*.js": true
+          },
+          "description": "%configuration.barrels.include%"
+        },
+        "ng42.barrels.exclude": {
+          "type": "object",
+          "default": {
+            "**/*.spec.*": true
+          },
+          "description": "%configuration.barrels.exclude%"
+        },
+        "ng42.barrels.fileTemplate": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "default": [
+            "export * from './$asset_name';"
+          ],
+          "description": "%configuration.barrels.fileTemplate%"
+        },
+        "ng42.barrels.directoryTemplate": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "default": [
+            "export * from './$asset_name';"
+          ],
+          "description": "%configuration.barrels.directoryTemplate%"
+        },
+        "ng42.barrels.headerTemplate": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "default": [
+            "// start:ng42.barrel"
+          ],
+          "description": "%configuration.barrels.headerTemplate%"
+        },
+        "ng42.barrels.footerTemplate": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "default": [
+            "// end:ng42.barrel"
+          ],
+          "description": "%configuration.barrels.footerTemplate%"
+        },
+        "ng42.barrels.useTemplates": {
+          "type": "object",
+          "default": {
+            "header": true,
+            "footer": true
+          },
+          "properties": {
+            "header": {
+              "type": "boolean",
+              "default": true,
+              "description": "%configuration.barrels.useTemplates.header%"
             },
-            {
-                "title": "%command.createFileBarrel%",
-                "category": "%commands.categroy.ng42%",
-                "command": "ng42.createFileBarrel"
-            },
-            {
-                "title": "%command.createBarrel%",
-                "category": "%commands.categroy.ng42%",
-                "command": "ng42.createBarrel"
+            "footer": {
+              "type": "boolean",
+              "default": true,
+              "description": "%configuration.barrels.useTemplates.footer%"
             }
-        ],
-        "snippets": [
-            {
-                "language": "typescript",
-                "path": "./snippets/redux/actions.json"
+          },
+          "description": "%configuration.barrels.useTemplates%"
+        },
+        "ng42.barrels.eol": {
+          "type": "string",
+          "enum": [
+            "\n",
+            "\r\n",
+            "os"
+          ],
+          "default": "os",
+          "description": "%configuration.barrels.eol%"
+        },
+        "ng42.barrels.menus": {
+          "type": "object",
+          "default": {
+            "createBarrel": true,
+            "createDirectoryBarrel": true,
+            "createFileBarrel": true
+          },
+          "properties": {
+            "createBarrel": {
+              "type": "boolean",
+              "default": true,
+              "description": "%configuration.barrels.menus.createBarrel%"
             },
-            {
-                "language": "typescript",
-                "path": "./snippets/redux/reducers.json"
+            "createDirectoryBarrel": {
+              "type": "boolean",
+              "default": true,
+              "description": "%configuration.barrels.menus.createDirectoryBarrel%"
             },
-            {
-                "language": "typescript",
-                "path": "./snippets/redux/selectors.json"
-            },
-            {
-                "language": "typescript",
-                "path": "./snippets/redux/states.json"
-            },
-            {
-                "language": "typescript",
-                "path": "./snippets/redux/effects.json"
+            "createFileBarrel": {
+              "type": "boolean",
+              "default": true,
+              "description": "%configuration.barrels.menus.createFileBarrel%"
             }
-        ]
+          },
+          "description": "%configuration.barrels.menus%"
+        }
+      }
     },
-    "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "ng42.createDirectoryBarrel",
+          "group": "1_modification",
+          "when": "explorerResourceIsFolder && config.ng42.barrels.menus.createDirectoryBarrel"
+        },
+        {
+          "command": "ng42.createFileBarrel",
+          "group": "1_modification",
+          "when": "explorerResourceIsFolder && config.ng42.barrels.menus.createFileBarrel"
+        },
+        {
+          "command": "ng42.createBarrel",
+          "group": "1_modification",
+          "when": "explorerResourceIsFolder && config.ng42.barrels.menus.createBarrel"
+        }
+      ]
     },
-    "dependencies": {
-        "vscode-nls": "^1.0.4"
-    },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
-    }
+    "commands": [
+      {
+        "title": "%command.createDirectoryBarrel%",
+        "category": "%commands.categroy.ng42%",
+        "command": "ng42.createDirectoryBarrel"
+      },
+      {
+        "title": "%command.createFileBarrel%",
+        "category": "%commands.categroy.ng42%",
+        "command": "ng42.createFileBarrel"
+      },
+      {
+        "title": "%command.createBarrel%",
+        "category": "%commands.categroy.ng42%",
+        "command": "ng42.createBarrel"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets/redux/actions.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/redux/reducers.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/redux/selectors.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/redux/states.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/redux/effects.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/glob": "^5.0.30",
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.40",
+    "mocha": "^3.3.0",
+    "typescript": "^2.3.2",
+    "vscode": "^1.1.0",
+    "vscode-nls": "^2.0.2"
+  }
 }

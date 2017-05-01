@@ -1,35 +1,40 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as glob from 'glob';
+
+import { SimpleIOResult } from '../models';
+import { workspace } from 'vscode';
+
+
 
 export function getFullPath(srcPath: string, filename: string) {
   return path.join(srcPath, filename);
 }
 
-export function getDirectories(srcPath: string) {
-  return fs.readdirSync(srcPath)
-    .filter((file) => {
-      const stat = fs.statSync(getFullPath(srcPath, file))
-      return stat.isDirectory();
-    });
+export function getDirectories(srcPath: string, excludes: string | string[]): SimpleIOResult[] {
+  const results = glob.sync('**/', {
+    cwd: srcPath,
+    ignore: excludes,
+    nodir: false
+  }).map(path => ({
+    path,
+    isDirectory: true
+  }));
+
+  return results;
 }
 
-export function getFiles(srcPath: string, exts?: string[]) {
-  let files = fs.readdirSync(srcPath)
-    .filter((file) => {
-      const filePath = getFullPath(srcPath, file);
-      const stat = fs.statSync(filePath);
-      const ext = path.extname(file);
-      const isEnabledType = !!exts.find(x => x === ext);
+export function getFiles(srcPath: string, includes: string, excludes: string | string[]): SimpleIOResult[] {
+  const results = glob.sync(includes, {
+    cwd: srcPath,
+    ignore: excludes,
+    nodir: true
+  }).map(result => ({
+    path: path.parse(result).name,
+    isDirectory: false
+  }));
 
-      return stat.isFile() && isEnabledType;
-    })
-    .map(file => {
-      return exts.reduce((filename, ext) => {
-        return path.basename(filename, ext);
-      }, file)
-    });
-
-    return files;
+  return results;
 }
 
 export function exists(filePath: string) {
