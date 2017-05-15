@@ -50,8 +50,6 @@ barrellAll
 
 ## Release Notes
 
-### 0.0.6
-- Added config section for barrel commands.
-- Added Glob support for barrel commands.
-- Added Output support for terminal.
+### 0.0.7
+- Fixed promise errors preventing the creation of barrels
 

@@ -3,7 +3,7 @@
   "displayName": "NG.42 TS Helpers",
   "description": "Adds snippets, create barrel commands, and scafolding for ngRx.",
   "icon": "images/NG-42-logo.svg",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "NG-42",
   "license": "LICENSE.md",
   "bugs": {
@@ -230,5 +230,8 @@
     "typescript": "^2.3.2",
     "vscode": "^1.1.0",
     "vscode-nls": "^2.0.2"
+  },
+  "dependencies": {
+    "ramda": "^0.23.0"
   }
 }
