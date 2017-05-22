@@ -50,6 +50,8 @@ barrellAll
 
 ## Release Notes
 
+### 0.0.7
+- Fixed promise errors preventing the creation of barrels
 
 ### 0.0.7
 - Fixed promise errors preventing the creation of barrels

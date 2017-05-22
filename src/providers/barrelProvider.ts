@@ -8,7 +8,6 @@ import { exists } from 'fs';
 
 
 import * as io from '../libs/io';
-import * as editor from '../libs/editor';
 import { hydrateTemplate } from '../libs/template';
 import { BarrelConfig } from '../barrelConfig';
 import { SimpleIOResult } from '../models';
@@ -30,6 +29,7 @@ interface Command {
 
 export class BarrelProvider {
   private static readonly Commands: Command[] = [];
+
   private static Command(commandId: string): Function {
     return (target: any, key: string, descriptor: any) => {
       if (!(typeof descriptor.value === 'function')) {
@@ -96,7 +96,6 @@ export class BarrelProvider {
 
   @BarrelProvider.Command('ng42.createFileBarrel')
   @BarrelProvider.CatchErrors
-
   async barrelFiles(uri?: Uri) {
     return await this.createBarrel(uri, BarrelType.Files, this.options);
   }
@@ -123,7 +122,6 @@ export class BarrelProvider {
       .then(artifacts => {
         const body = this.createBody(artifacts, config);
         io.writeFile(barrelPath, body);
-        editor.showAndOpen(barrelPath);
         return true;
       })
       .catch((err: Error) => { throw err });
@@ -150,7 +148,7 @@ export class BarrelProvider {
           .reduce<SimpleIOResult[]>((files, glob) => files
             .concat(io.getFiles(srcPath, glob, excludes)), []));
         break;
-    
+
       case BarrelType.Directories:
         artifacts.push(...io.getDirectories(srcPath, excludes));
         break;

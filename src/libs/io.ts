@@ -6,7 +6,6 @@ import { SimpleIOResult } from '../models';
 import { workspace } from 'vscode';
 
 
-
 export function getFullPath(srcPath: string, filename: string) {
   return path.join(srcPath, filename);
 }
