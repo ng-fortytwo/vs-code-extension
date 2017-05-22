@@ -29,7 +29,6 @@ interface Command {
 
 export class BarrelProvider {
   private static readonly Commands: Command[] = [];
-
   private static Command(commandId: string): Function {
     return (target: any, key: string, descriptor: any) => {
       if (!(typeof descriptor.value === 'function')) {
@@ -96,6 +95,7 @@ export class BarrelProvider {
 
   @BarrelProvider.Command('ng42.createFileBarrel')
   @BarrelProvider.CatchErrors
+
   async barrelFiles(uri?: Uri) {
     return await this.createBarrel(uri, BarrelType.Files, this.options);
   }
@@ -148,7 +148,7 @@ export class BarrelProvider {
           .reduce<SimpleIOResult[]>((files, glob) => files
             .concat(io.getFiles(srcPath, glob, excludes)), []));
         break;
-
+    
       case BarrelType.Directories:
         artifacts.push(...io.getDirectories(srcPath, excludes));
         break;
